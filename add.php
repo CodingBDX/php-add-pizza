@@ -1,6 +1,19 @@
 <?php
 include('../tuto/config/db_connect.php');
 
+if(isset($_POST['submit'])) {
+  session_start();
+
+    setcookie('title', $_POST['title'], time() + 86400);
+      setcookie('email', $_POST['email'], time() + 86400);
+        setcookie('ingredients', $_POST['ingredients'], time() + 86400);
+        $titleCookie = $_COOKIE['title'] ?? 'unknow';
+$emailCookie = $_COOKIE['email'] ?? 'unknow';
+$ingredientsCookie = $_COOKIE['ingredients'] ?? 'unknow';
+
+
+ 
+}
 $title = $email = $ingredients = '';
 $errors = array('email'=> '', 'title' => '', 'ingredients' => '');
 
@@ -53,8 +66,8 @@ if(mysqli_query($conn, $sql)) {
   echo 'query error' . mysqli_error($conn);
 }
 mysqli_close($conn);
-    $errors['formvalid'] = '<div class="btn green">form is send, redirect to index after 5 secondes</div><br />';
-    header( "refresh:5;url=index.php" );
+    $errors['formvalid'] = '<div class="btn green">form is sen</div><br />';
+
   }
 }
 }
@@ -67,7 +80,7 @@ mysqli_close($conn);
   <h4 class="center">add a pizza
 
   </h4>
-  <form action="" class="white" action="add.php" method="POST">
+  <form  class="white" action="<?php echo $_SERVER['PHP_SELF']  ?>" method="POST">
     <label for="">your mail:</label>
 
     <input type="text" name="email" value="<?php echo htmlspecialchars( $email) ?>" >
@@ -85,6 +98,32 @@ mysqli_close($conn);
   <input type="submit" name="submit" value="btn" class="btn brand z-depth-0">
 </div>
   </form>
+
+
+  <div class="container">
+  <div class="row">
+   <h4>Your Pizza</h4>
+      <div class="col s6 md3">
+        <div class="card z-depth-0">
+          <img src="./img/pizza.jpg" class="pizza">
+          <div class="card-content center">
+            <h6><?php echo   $titleCookie ?></h6>
+            <ul>
+                               <?php foreach(explode(',', $ingredientsCookie) as $ing): ?>
+<li class='btn green m4'><?php echo htmlspecialchars(  $ing); ?></li><br />
+  <?php endforeach ?>              
+            </ul>
+          </div>
+          <div class="card-action right-align">
+           write by  <?php echo   $emailCookie ?>
+          </div>
+                </div>
+      </div>
+
+    
+   
+  </div>
+</div>
 </section>
 <?php include('templates/footer.php')?>
 

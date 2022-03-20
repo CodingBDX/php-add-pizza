@@ -1,18 +1,23 @@
 <?php
-$score = 50;
+class user {
+  public $email;
+  public $name;
 
-$score > 40 ? 'high score' : 'low score';
+  public function __construct($name, $email)
+  {
+    $this->email = $email;
+    $this->name = $name;
+
+  }
+  public function login(){
+    echo $this->name . 'user are log';
+  }
+}
+//   $userOne = new User();
+
+//   $userOne->login();
+//   echo $userOne->name . '<br />';
+//   echo $userOne->email ;
+$userTwo = new User('john', 'dsf@dsfd.fr');
+echo $userTwo-> login();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
