@@ -1,6 +1,9 @@
 <?php
 include('../tuto/config/db_connect.php');
-
+session_start();
+if(!isset($_SESSION['username'])){
+  header('Location:index.php');
+}
 if(isset($_POST['submit'])) {
   session_start();
 

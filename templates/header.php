@@ -1,10 +1,10 @@
 <?php 
 session_start();
 if($_SERVER['query_string'] == 'noname'){
-  unset($_SESSION['name']);
+  unset($_SESSION['username']);
 }
-$name = $_SESSION['name'] ?? 'Guest';
-$gender = $_COOKIE['gender'] ?? 'unknow';
+$name = $_SESSION['username'] ?? 'Guest';
+
 ?>
 <head>
   <meta charset="UTF-8">
@@ -39,8 +39,20 @@ $gender = $_COOKIE['gender'] ?? 'unknow';
     <div class="container">
       <a href="index.php" class="brand-logo brand-text">Ninja pizza</a>
       <ul id="nav-mobile" class="right hide-on-small-and-down">
-        <li class="grey-text">hello<?php echo htmlspecialchars($name)?>(<?php echo htmlspecialchars($gender)?>)</li>
-        <li><a href="add.php" class="btn brand z-depth-0">add a pizza</a></li>
+        <li class="grey-text">hello:<?php echo htmlspecialchars($name)?></li>
+       
+        
+
+        
+<?php if( isset($_SESSION['username']) && !empty($_SESSION['username']) )
+{
+?>
+      <li><a href="logout.php" class="btn brand z-depth-0">logout</a></li>
+<?php }else{ ?>
+     <li><a href="login.php" class="btn brand z-depth-0">login</a></li>
+     <li><a href="register.php" class="btn brand z-depth-0">register</a></li>
+<?php } ?>
+
       </ul>
     </div>
   </nav>
